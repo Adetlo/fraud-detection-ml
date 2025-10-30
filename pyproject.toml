@@ -6,7 +6,7 @@ readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.12"
 authors = [{ name = "Adetlo" }]
-keywords = ["machine-learning", "fintech", "fraud-detection", "imbalanced-learning"]
+keywords = ["machine-learning", "fintech", "fraud-detection", "imbalanced-learning", "mlops"]
 classifiers = [
   "Development Status :: 3 - Alpha",
   "Intended Audience :: Developers",
@@ -23,6 +23,8 @@ dependencies = [
   "scikit-learn>=1.4",
   "xgboost>=2.0",
   "matplotlib>=3.8",
+  "joblib>=1.4",
+  "mlflow-skinny>=2.16",
   "structlog>=24.1",
 ]
 
@@ -69,7 +71,7 @@ mypy_path = "src"
 packages = ["fraud_ml"]
 
 [[tool.mypy.overrides]]
-module = ["sklearn", "sklearn.*", "pyarrow", "pyarrow.*", "scipy", "scipy.*"]
+module = ["sklearn", "sklearn.*", "joblib", "joblib.*", "mlflow", "mlflow.*", "pyarrow", "pyarrow.*", "scipy", "scipy.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
