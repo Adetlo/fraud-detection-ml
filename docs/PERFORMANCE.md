@@ -37,9 +37,12 @@ feature step, which is listed in the roadmap.
 
 ## Docker
 
-Image size 2.0 GB (Python 3.12 slim + scientific stack + mlflow-skinny and its
-dependencies). First start trains a 20,000-row bootstrap model in about 9 seconds before
-`/health/ready` reports ready.
+Image size 1.35 GB (Python 3.12 slim + scientific stack + mlflow-skinny and its
+dependencies; the virtual environment is 814 MB, dominated by pyarrow, scipy, XGBoost,
+pandas and scikit-learn). XGBoost's Linux wheel would also pull in the NVIDIA NCCL library
+(about 350 MB) for multi-GPU training; a `uv` dependency override in `pyproject.toml` drops
+it because this project is CPU-only. First start trains a 20,000-row bootstrap model in
+about 9 seconds before `/health/ready` reports ready.
 
 ## Test suite
 

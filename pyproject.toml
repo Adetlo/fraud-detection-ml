@@ -58,6 +58,9 @@ packages = ["src/fraud_ml"]
 
 [tool.uv]
 package = true
+# XGBoost's Linux wheel depends on nvidia-nccl-cu13 (multi-GPU distributed training only).
+# This project trains and scores on CPU; dropping it removes ~350 MB from the Docker image.
+override-dependencies = ["nvidia-nccl-cu13 ; sys_platform == 'never'"]
 
 [tool.ruff]
 target-version = "py312"

@@ -86,20 +86,21 @@ code, tests and documents.
 ## 3. Relationship to portfolio
 
 ```
-corebank-ledger          synthetic financial activity (double-entry ledger)
+corebank-ledger        transaction-system integrity (double-entry ledger, idempotency, reversals)
       |
-txn-data-pipeline        validated, curated transaction data (financial-transaction/1)
+txn-data-pipeline      validated, reconciled, analytics-ready financial data
       |
-fraud-detection-ml       fraud risk score + explanation + decision-support output
+fraud-detection-ml     fraud risk scoring and decision support
 ```
 
-[corebank-ledger](https://github.com/Adetlo/corebank-ledger) produces synthetic activity,
-[txn-data-pipeline](https://github.com/Adetlo/txn-data-pipeline) validates and curates it,
-and this project scores it. The link is conceptual: this repository is independently
-runnable, defines its own contract (`fraud-transaction/1`), ships its own generator and
-sample data, and offers an optional adapter (`fraud_ml.adapters.txn_pipeline`) that maps
-the pipeline's curated Parquet shape onto the contract. See
-[docs/DATA_CONTRACT.md](docs/DATA_CONTRACT.md).
+[corebank-ledger](https://github.com/Adetlo/corebank-ledger) models a transaction system,
+[txn-data-pipeline](https://github.com/Adetlo/txn-data-pipeline) validates, reconciles and
+curates transaction data, and this project scores transactions for fraud risk. Together they
+sketch a miniature banking technology estate. **All three repositories are independently
+runnable**; the integration is conceptual, not live. This repository defines its own
+contract (`fraud-transaction/1`), ships its own generator and sample data, and offers an
+optional adapter (`fraud_ml.adapters.txn_pipeline`) that maps the pipeline's curated Parquet
+shape onto the contract. See [docs/DATA_CONTRACT.md](docs/DATA_CONTRACT.md).
 
 ## 4. Architecture
 
@@ -270,9 +271,12 @@ Selected model: **XGBoost** (validation PR-AUC 0.786 vs 0.667, lower review rate
 confusion matrix at threshold 0.065: TP 56, FP 116, FN 11, TN 7,317.
 
 Honest reading: on the test period the two models are statistically indistinguishable
-(67 positives, roughly ±0.05 PR-AUC), and the baseline reaches higher recall at a slightly
-higher review rate. ROC-AUC above 0.99 for both says little under this imbalance; the
-precision-recall curve is the picture that matters. Segment performance (currency, channel,
+(67 positives, roughly ±0.05 PR-AUC), the baseline reaches higher recall at a slightly
+higher review rate, and on a 10,000-row dataset the baseline wins outright. This is kept
+visible on purpose: simple baselines matter, test results are reported as they came out
+rather than cherry-picked, and model complexity has to be justified empirically before it is
+shipped. ROC-AUC above 0.99 for both says little under this imbalance; the precision-recall
+curve is the picture that matters. Segment performance (currency, channel,
 transaction type, domestic vs cross-border) is in `reports/demo/segment_metrics.csv`; it is
 segment performance, not a fairness analysis. Details and plots in
 [docs/MODEL_EVALUATION.md](docs/MODEL_EVALUATION.md).
@@ -321,8 +325,9 @@ over contract columns. SHAP was left out on purpose.
 `calibration_method`, validation/test/baseline metrics, `selection_rationale`,
 `split_summary` and `artifact_sha256`. `models/latest/` is an explicit promotion. Loading
 fails safely on a missing or tampered hash, an unsupported schema, a different feature
-version or a different score contract. MLflow (local file store) records parameters,
-metrics, reports and metadata per run.
+version or a different score contract. MLflow with a local file store records parameters,
+metrics, reports and metadata per run: this is local experiment tracking for educational
+reproducibility, not a production model registry.
 [ADR 0007](docs/ADR/0007-versioned-model-artifacts.md).
 
 ## 17. Drift monitoring
@@ -461,11 +466,13 @@ Decisions are recorded in [docs/ADR](docs/ADR/README.md).
 * No graph/network fraud model; no device-fingerprint or merchant-risk data.
 * No real-time feature store and no streaming feature computation; online callers must
   supply point-in-time context.
-* Local MLflow file store only (maintenance-mode backend in MLflow 3).
+* Local MLflow file store only, used for experiment tracking rather than as a model
+  registry; MLflow 3 documents the file-store backend as maintenance-mode.
 * Single model service, in-process model; single-request latency about 15 ms through pandas.
 * Limited drift methodology (PSI on marginals; no performance or concept drift).
 * No automated retraining; no autonomous block decisions by design.
-* Docker image is about 2 GB because of the scientific stack and MLflow dependencies.
+* Docker image is about 1.35 GB because of the scientific stack (pyarrow, scipy, XGBoost,
+  pandas, scikit-learn, matplotlib) and MLflow dependencies.
 
 ## 25. Roadmap
 

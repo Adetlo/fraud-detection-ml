@@ -101,8 +101,9 @@ match the recorded one. See [MODEL_GOVERNANCE.md](MODEL_GOVERNANCE.md) and
   model-info, serve, demo.
 * **API** (`uvicorn fraud_ml.main:app` or `fraud-ml serve`): loads `<model_dir>/latest` at
   startup; `/health/ready` reports whether a valid artifact is loaded.
-* **MLflow**: optional local file store (`file:./mlruns`); parameters, metrics, reports and
-  metadata are logged per run. MLflow 3 marks the file store as maintenance-only; the
+* **MLflow**: optional local file store (`file:./mlruns`) for experiment tracking and
+  reproducibility; parameters, metrics, reports and metadata are logged per run. It is not
+  presented as a model registry. MLflow 3 marks the file store as maintenance-only; the
   project opts in explicitly because a zero-infrastructure store is the right choice here.
 * **Docker**: one image for both the API and the CLI. On first start the entrypoint trains a
   small bootstrap model from synthetic data when no artifact is mounted.
