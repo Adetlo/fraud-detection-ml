@@ -1,0 +1,65 @@
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+# Tooling caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+bandit-report.*
+requirements-audit.txt
+
+# Generated datasets (small committed fixtures live in data/samples/)
+data/*
+!data/.gitkeep
+!data/samples/
+data/samples/*
+!data/samples/*.parquet
+!data/samples/*.jsonl
+!data/samples/README.md
+
+# Trained model binaries and MLflow local store
+models/*
+!models/.gitkeep
+mlruns/
+mlartifacts/
+
+# Locally generated reports (the committed demo artifacts live in reports/demo/)
+reports/*
+!reports/.gitkeep
+!reports/demo/
+reports/demo/*
+!reports/demo/*.json
+!reports/demo/*.csv
+!reports/demo/*.png
+!reports/demo/README.md
+
+# Temporary scoring files
+*.tmp
+scores*.parquet
+
+# Benchmarks
+benchmarks/*.json
+
+# macOS
+.DS_Store
+
+# IDEs
+.idea/
+.vscode/
+*.swp
