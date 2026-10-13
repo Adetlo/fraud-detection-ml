@@ -1,0 +1,32 @@
+name: fraud-detection-ml
+
+services:
+  fraud-ml:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: fraud-detection-ml:local
+    environment:
+      FRAUD_ML_MODEL_DIR: /app/models
+      FRAUD_ML_DATA_DIR: /app/data
+      FRAUD_ML_REPORTS_DIR: /app/reports
+      FRAUD_ML_MLFLOW_ENABLED: "false"
+      FRAUD_ML_LOG_FORMAT: json
+      FRAUD_ML_LOG_LEVEL: INFO
+      # On first start the entrypoint trains a small bootstrap model from synthetic data.
+      FRAUD_ML_BOOTSTRAP_MODEL: "true"
+      FRAUD_ML_BOOTSTRAP_ROWS: "20000"
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - fraud-ml-models:/app/models
+      - fraud-ml-data:/app/data
+      - fraud-ml-reports:/app/reports
+    # `docker compose up --build` serves the API on localhost:8000;
+    # `docker compose run --rm fraud-ml fraud-ml demo` runs the full demo in the same image.
+    command: ["fraud-ml", "serve", "--host", "0.0.0.0", "--port", "8000"]
+
+volumes:
+  fraud-ml-models:
+  fraud-ml-data:
+  fraud-ml-reports:
