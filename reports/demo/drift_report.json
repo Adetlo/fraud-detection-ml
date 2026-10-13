@@ -1,0 +1,373 @@
+{
+  "status": "WARNING",
+  "features_checked": 21,
+  "features_warning": 1,
+  "features_drifted": 0,
+  "drifted_features": [],
+  "warning_features": [
+    "is_new_beneficiary"
+  ],
+  "score_drift": {
+    "feature": "risk_probability",
+    "kind": "score",
+    "psi": 0.07679559743273573,
+    "status": "OK",
+    "reference_rows": 35000,
+    "current_rows": 7500,
+    "detail": {
+      "bins": 10,
+      "reference_mean": 0.019265273229571903,
+      "current_mean": 0.011588821143853905,
+      "reference_missing_rate": 0.0,
+      "current_missing_rate": 0.0
+    }
+  },
+  "thresholds": {
+    "psi_warning": 0.1,
+    "psi_drift": 0.25,
+    "drifted_feature_fraction_for_drift": 0.25,
+    "bins": 10
+  },
+  "features": [
+    {
+      "feature": "amount",
+      "kind": "numeric",
+      "psi": 0.002104665573693653,
+      "status": "OK",
+      "reference_rows": 35000,
+      "current_rows": 7500,
+      "detail": {
+        "bins": 10,
+        "reference_mean": 2240.2144545714286,
+        "current_mean": 1654.3640213333333,
+        "reference_missing_rate": 0.0,
+        "current_missing_rate": 0.0
+      }
+    },
+    {
+      "feature": "account_age_days",
+      "kind": "numeric",
+      "psi": 0.08100621067798186,
+      "status": "OK",
+      "reference_rows": 35000,
+      "current_rows": 7500,
+      "detail": {
+        "bins": 10,
+        "reference_mean": 931.1176285714286,
+        "current_mean": 1023.0490666666667,
+        "reference_missing_rate": 0.0,
+        "current_missing_rate": 0.0
+      }
+    },
+    {
+      "feature": "transactions_1h",
+      "kind": "numeric",
+      "psi": 0.0,
+      "status": "OK",
+      "reference_rows": 35000,
+      "current_rows": 7500,
+      "detail": {
+        "bins": 1,
+        "reference_mean": 0.35422857142857145,
+        "current_mean": 0.09733333333333333,
+        "reference_missing_rate": 0.0,
+        "current_missing_rate": 0.0
+      }
+    },
+    {
+      "feature": "transactions_24h",
+      "kind": "numeric",
+      "psi": 0.003439527045149604,
+      "status": "OK",
+      "reference_rows": 35000,
+      "current_rows": 7500,
+      "detail": {
+        "bins": 3,
+        "reference_mean": 0.8494,
+        "current_mean": 0.9378666666666666,
+        "reference_missing_rate": 0.0,
+        "current_missing_rate": 0.0
+      }
+    },
+    {
+      "feature": "amount_1h",
+      "kind": "numeric",
+      "psi": 0.0,
+      "status": "OK",
+      "reference_rows": 35000,
+      "current_rows": 7500,
+      "detail": {
+        "bins": 1,
+        "reference_mean": 348.4163862857143,
+        "current_mean": 117.50684533333335,
+        "reference_missing_rate": 0.0,
+        "current_missing_rate": 0.0
+      }
+    },
+    {
+      "feature": "amount_24h",
+      "kind": "numeric",
+      "psi": 0.0022113698063828038,
+      "status": "OK",
+      "reference_rows": 35000,
+      "current_rows": 7500,
+      "detail": {
+        "bins": 4,
+        "reference_mean": 1354.3314965714287,
+        "current_mean": 972.0015960000002,
+        "reference_missing_rate": 0.0,
+        "current_missing_rate": 0.0
+      }
+    },
+    {
+      "feature": "unique_counterparties_24h",
+      "kind": "numeric",
+      "psi": 0.004716242994053949,
+      "status": "OK",
+      "reference_rows": 35000,
+      "current_rows": 7500,
+      "detail": {
+        "bins": 3,
+        "reference_mean": 0.6336857142857143,
+        "current_mean": 0.7321333333333333,
+        "reference_missing_rate": 0.0,
+        "current_missing_rate": 0.0
+      }
+    },
+    {
+      "feature": "days_since_last_transaction",
+      "kind": "numeric",
+      "psi": 0.002539342246565131,
+      "status": "OK",
+      "reference_rows": 33770,
+      "current_rows": 7496,
+      "detail": {
+        "bins": 10,
+        "reference_mean": 3.824857533294296,
+        "current_mean": 4.162300287324777,
+        "reference_missing_rate": 0.03514285714285714,
+        "current_missing_rate": 0.0005333333333333334
+      }
+    },
+    {
+      "feature": "account_median_amount_30d",
+      "kind": "numeric",
+      "psi": 0.009839201633557155,
+      "status": "OK",
+      "reference_rows": 33487,
+      "current_rows": 7410,
+      "detail": {
+        "bins": 10,
+        "reference_mean": 1747.9564907277452,
+        "current_mean": 1150.3082058029688,
+        "reference_missing_rate": 0.04322857142857143,
+        "current_missing_rate": 0.012
+      }
+    },
+    {
+      "feature": "account_mean_amount_30d",
+      "kind": "numeric",
+      "psi": 0.011338530412538917,
+      "status": "OK",
+      "reference_rows": 33487,
+      "current_rows": 7410,
+      "detail": {
+        "bins": 10,
+        "reference_mean": 2336.4082626985005,
+        "current_mean": 1817.624333697816,
+        "reference_missing_rate": 0.04322857142857143,
+        "current_missing_rate": 0.012
+      }
+    },
+    {
+      "feature": "inflow_amount_24h",
+      "kind": "numeric",
+      "psi": 0.0,
+      "status": "OK",
+      "reference_rows": 35000,
+      "current_rows": 7500,
+      "detail": {
+        "bins": 1,
+        "reference_mean": 287.0793614285714,
+        "current_mean": 184.36395733333336,
+        "reference_missing_rate": 0.0,
+        "current_missing_rate": 0.0
+      }
+    },
+    {
+      "feature": "currency",
+      "kind": "categorical",
+      "psi": 0.003479715702772378,
+      "status": "OK",
+      "reference_rows": 35000,
+      "current_rows": 7500,
+      "detail": {
+        "largest_frequency_shifts": {
+          "GBP": 0.0202,
+          "EUR": -0.0104,
+          "USD": 0.0071,
+          "CHF": -0.0053,
+          "AUD": -0.0047
+        },
+        "new_categories": []
+      }
+    },
+    {
+      "feature": "transaction_type",
+      "kind": "categorical",
+      "psi": 0.0002573397548094787,
+      "status": "OK",
+      "reference_rows": 35000,
+      "current_rows": 7500,
+      "detail": {
+        "largest_frequency_shifts": {
+          "DIRECT_DEBIT": 0.0035,
+          "CARD_PURCHASE": -0.0034,
+          "DEPOSIT": -0.0016,
+          "WITHDRAWAL": 0.0009,
+          "PAYMENT": 0.0004
+        },
+        "new_categories": []
+      }
+    },
+    {
+      "feature": "channel",
+      "kind": "categorical",
+      "psi": 0.00036160828548994063,
+      "status": "OK",
+      "reference_rows": 35000,
+      "current_rows": 7500,
+      "detail": {
+        "largest_frequency_shifts": {
+          "BRANCH": 0.0032,
+          "ONLINE": -0.0029,
+          "MOBILE": -0.0029,
+          "CARD": 0.0018,
+          "ATM": 0.0011
+        },
+        "new_categories": []
+      }
+    },
+    {
+      "feature": "country",
+      "kind": "categorical",
+      "psi": 0.007999292500221139,
+      "status": "OK",
+      "reference_rows": 35000,
+      "current_rows": 7500,
+      "detail": {
+        "largest_frequency_shifts": {
+          "GB": 0.0226,
+          "NL": -0.0102,
+          "US": 0.0067,
+          "DE": 0.0056,
+          "CH": -0.0056
+        },
+        "new_categories": []
+      }
+    },
+    {
+      "feature": "beneficiary_country",
+      "kind": "categorical",
+      "psi": 0.00603842752386297,
+      "status": "OK",
+      "reference_rows": 35000,
+      "current_rows": 7500,
+      "detail": {
+        "largest_frequency_shifts": {
+          "GB": 0.0172,
+          "NL": -0.0061,
+          "DE": 0.0055,
+          "CH": -0.0049,
+          "US": 0.0048
+        },
+        "new_categories": []
+      }
+    },
+    {
+      "feature": "merchant_category",
+      "kind": "categorical",
+      "psi": 0.0029028408203505517,
+      "status": "OK",
+      "reference_rows": 35000,
+      "current_rows": 7500,
+      "detail": {
+        "largest_frequency_shifts": {
+          "RESTAURANT": -0.0061,
+          "ELECTRONICS": -0.0044,
+          "<missing>": 0.0038,
+          "TRAVEL": 0.0034,
+          "ENTERTAINMENT": 0.0019
+        },
+        "new_categories": []
+      }
+    },
+    {
+      "feature": "ip_risk_band",
+      "kind": "categorical",
+      "psi": 0.0003726961901608614,
+      "status": "OK",
+      "reference_rows": 35000,
+      "current_rows": 7500,
+      "detail": {
+        "largest_frequency_shifts": {
+          "LOW": -0.0087,
+          "UNKNOWN": 0.0067,
+          "MEDIUM": 0.0024,
+          "HIGH": -0.0004,
+          "<other>": 0.0
+        },
+        "new_categories": []
+      }
+    },
+    {
+      "feature": "customer_segment",
+      "kind": "categorical",
+      "psi": 0.0018912965026667411,
+      "status": "OK",
+      "reference_rows": 35000,
+      "current_rows": 7500,
+      "detail": {
+        "largest_frequency_shifts": {
+          "PREMIUM": -0.0168,
+          "RETAIL": 0.0152,
+          "BUSINESS": 0.0015,
+          "<other>": 0.0
+        },
+        "new_categories": []
+      }
+    },
+    {
+      "feature": "is_new_beneficiary",
+      "kind": "categorical",
+      "psi": 0.21600165743591865,
+      "status": "WARNING",
+      "reference_rows": 35000,
+      "current_rows": 7500,
+      "detail": {
+        "largest_frequency_shifts": {
+          "False": 0.2166,
+          "True": -0.2166,
+          "<other>": 0.0
+        },
+        "new_categories": []
+      }
+    },
+    {
+      "feature": "is_new_device",
+      "kind": "categorical",
+      "psi": 0.04196293120272189,
+      "status": "OK",
+      "reference_rows": 35000,
+      "current_rows": 7500,
+      "detail": {
+        "largest_frequency_shifts": {
+          "False": 0.0513,
+          "True": -0.0513,
+          "<other>": 0.0
+        },
+        "new_categories": []
+      }
+    }
+  ]
+}
