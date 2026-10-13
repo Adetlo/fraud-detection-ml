@@ -1,4 +1,4 @@
-# Build context: only pyproject.toml, src/, README.md and docker/ are copied.
+# Build context: only pyproject.toml, uv.lock, src/, README.md and docker/ are copied.
 .git
 .github
 .venv

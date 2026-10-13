@@ -1,14 +1,14 @@
 [project]
 name = "fraud-detection-ml"
-version = "0.1.0"
-description = "Educational fraud risk scoring and decision-support system for synthetic financial transactions, demonstrating temporal validation, class-imbalance handling, threshold optimisation, explainability and monitored inference."
+version = "1.0.0"
+description = "Production-style educational fraud risk scoring and decision-support system for synthetic financial transactions, demonstrating temporal validation, class-imbalance handling, threshold optimisation, explainability and monitored inference."
 readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.12"
 authors = [{ name = "Adetlo" }]
 keywords = ["machine-learning", "fintech", "fraud-detection", "fraud-risk", "imbalanced-learning", "mlops", "model-monitoring"]
 classifiers = [
-  "Development Status :: 3 - Alpha",
+  "Development Status :: 4 - Beta",
   "Intended Audience :: Developers",
   "License :: OSI Approved :: MIT License",
   "Programming Language :: Python :: 3.12",
@@ -16,16 +16,16 @@ classifiers = [
   "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
 dependencies = [
-  "pydantic>=2.5",
-  "pydantic-settings>=2.1",
-  "pandas>=2.1",
+  "pydantic>=2.8",
+  "pydantic-settings>=2.4",
+  "pandas>=2.2",
   "numpy>=1.26",
-  "pyarrow>=15.0",
-  "scikit-learn>=1.4",
-  "xgboost>=2.0",
+  "pyarrow>=17.0",
+  "scikit-learn>=1.5",
+  "xgboost>=2.1",
   "joblib>=1.4",
   "mlflow-skinny>=2.16",
-  "matplotlib>=3.8",
+  "matplotlib>=3.9",
   "fastapi>=0.115",
   "uvicorn>=0.30",
   "typer>=0.12",
@@ -58,11 +58,14 @@ packages = ["src/fraud_ml"]
 
 [tool.uv]
 package = true
+# XGBoost's Linux wheel depends on nvidia-nccl-cu13 (multi-GPU distributed training only).
+# This project trains and scores on CPU; dropping it removes ~350 MB from the Docker image.
+override-dependencies = ["nvidia-nccl-cu13 ; sys_platform == 'never'"]
 
 [tool.ruff]
 target-version = "py312"
 line-length = 100
-src = ["src", "tests"]
+src = ["src", "tests", "scripts"]
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "B", "UP", "N", "S", "RUF", "SIM", "DTZ", "T20", "PL"]
@@ -70,6 +73,7 @@ ignore = ["RUF012", "PLR0913", "PLR0917", "PLR2004", "PLR0912", "PLR0915", "PLR0
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["S101", "S105", "S106", "S108", "DTZ", "PLR", "RUF043", "E501"]
+"scripts/**" = ["T201", "S101", "E501"]
 "src/fraud_ml/cli/main.py" = ["E501"]  # Typer option declarations
 
 [tool.ruff.format]
