@@ -21,8 +21,8 @@ jobs:
     name: Lint, format and type-check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10.3.0
         with:
           enable-cache: true
       - name: Set up Python
@@ -40,8 +40,8 @@ jobs:
     name: Unit, property, integration, API and e2e tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10.3.0
         with:
           enable-cache: true
       - name: Set up Python
@@ -54,7 +54,7 @@ jobs:
         run: uv run fraud-ml demo --transactions 8000 --fraud-rate 0.015 --seed 7 --fast --no-mlflow --workdir ci-demo
       - name: Upload coverage and demo reports
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: coverage-and-reports
           path: |
@@ -67,8 +67,8 @@ jobs:
     name: Dependency and code security audit
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10.3.0
         with:
           enable-cache: true
       - name: Set up Python
@@ -86,10 +86,10 @@ jobs:
     name: Docker image build, readiness and score smoke test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: docker/setup-buildx-action@v3
+      - uses: actions/checkout@v7
+      - uses: docker/setup-buildx-action@v4
       - name: Build image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           push: false
