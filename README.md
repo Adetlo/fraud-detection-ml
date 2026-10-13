@@ -28,7 +28,7 @@ scoring with structured errors and correlation ids · batch scoring · PSI drift
 
 1. [Overview](#1-overview)
 2. [Why this project exists](#2-why-this-project-exists)
-3. [Relationship to portfolio](#3-relationship-to-portfolio)
+3. [Related portfolio projects](#3-related-portfolio-projects)
 4. [Architecture](#4-architecture)
 5. [ML problem formulation](#5-ml-problem-formulation)
 6. [Synthetic dataset](#6-synthetic-dataset)
@@ -83,22 +83,25 @@ reason a reviewer can read, that an artifact must say what produced it, and that
 system must notice when the world changes. This repository is that argument, written in
 code, tests and documents.
 
-## 3. Relationship to portfolio
+## 3. Related portfolio projects
+
+This is the last of three independently runnable projects that together sketch a miniature
+banking technology estate:
 
 ```
-corebank-ledger        transaction-system integrity (double-entry ledger, idempotency, reversals)
-      |
-txn-data-pipeline      validated, reconciled, analytics-ready financial data
-      |
-fraud-detection-ml     fraud risk scoring and decision support
+corebank-ledger        transaction integrity: double-entry ledger, idempotent posting, reversals
+      |                synthetic transaction export
+txn-data-pipeline      data quality, reconciliation, lineage, analytics-ready modelling
+      |                curated, reconciled transactions
+fraud-detection-ml     fraud risk scoring, model governance, monitored inference  (this repository)
 ```
 
 [corebank-ledger](https://github.com/Adetlo/corebank-ledger) models a transaction system,
 [txn-data-pipeline](https://github.com/Adetlo/txn-data-pipeline) validates, reconciles and
 curates transaction data, and this project scores transactions for fraud risk. Together they
-sketch a miniature banking technology estate. **All three repositories are independently
-runnable**; the integration is conceptual, not live. This repository defines its own
-contract (`fraud-transaction/1`), ships its own generator and sample data, and offers an
+form one portfolio. **All three repositories are independently runnable**; the
+integration is conceptual, not live. Overview on the [GitHub profile](https://github.com/Adetlo).
+This repository defines its own contract (`fraud-transaction/1`), ships its own generator and sample data, and offers an
 optional adapter (`fraud_ml.adapters.txn_pipeline`) that maps the pipeline's curated Parquet
 shape onto the contract. See [docs/DATA_CONTRACT.md](docs/DATA_CONTRACT.md).
 

@@ -89,3 +89,15 @@ small; CI must stay well under five minutes.
 
 Conventional prefixes: `feat:`, `fix:`, `test:`, `docs:`, `ci:`, `chore:`, `refactor:`.
 One logical change per commit; CI must be green on `main`.
+
+## Pull request expectations
+
+* CI must be green (quality, test, security and docker jobs).
+* Every behaviour change ships with tests; a bug fix includes a regression test.
+* Changes to the contracts, the feature matrix, the threshold policy or model selection
+  come with the matching doc update (`docs/`, `MODEL_CARD.md`) or a new ADR under
+  `docs/ADR/`; `FEATURE_VERSION` is bumped when the feature matrix changes.
+* Metric numbers in docs only change together with the regenerated `reports/demo/` run
+  that produced them.
+* Synthetic data only. Never add real identifiers, hostnames, credentials or
+  institution-specific formats.
