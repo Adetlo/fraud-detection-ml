@@ -1,0 +1,380 @@
+{
+  "run_id": "20261013T143729Z",
+  "model_version": "fraud-risk/1.0.0",
+  "artifact_path": "models/20261013T143729Z",
+  "reports_path": "reports",
+  "winner": "xgboost",
+  "selection_rationale": "xgboost has the higher validation PR-AUC (0.7864 vs 0.6672); expected cost 1851 vs 1763, review rate 3.19% vs 3.51%",
+  "candidates": {
+    "logistic_regression": {
+      "name": "logistic_regression",
+      "calibration": {
+        "method": "sigmoid",
+        "brier_uncalibrated": 0.017024358248290194,
+        "brier_by_method": {
+          "sigmoid": 0.006654089853639325
+        },
+        "pr_auc_uncalibrated": 0.6671662846885453,
+        "pr_auc_by_method": {
+          "sigmoid": 0.6671662846885453
+        },
+        "rationale": "applied sigmoid calibration: Brier 0.0170 -> 0.0067, PR-AUC 0.6672 -> 0.6672 on the validation split; isotonic skipped (96 positives < 500)"
+      },
+      "threshold": {
+        "threshold": 0.050992,
+        "priority_threshold": 0.56,
+        "low_upper": 0.025496,
+        "policy_satisfied": true,
+        "rationale": "recall 0.917 >= target 0.80 within review-rate ceiling 5.0%; lowest expected cost among feasible thresholds",
+        "recall": 0.9166666666666666,
+        "precision": 0.33460076045627374,
+        "review_rate": 0.03506666666666667,
+        "alerts_per_1000": 35.06666666666667,
+        "expected_cost": 1763.0
+      },
+      "validation_metrics": {
+        "pr_auc": 0.6671662846885453,
+        "roc_auc": 0.9892527124977489,
+        "precision": 0.33460076045627374,
+        "recall": 0.9166666666666666,
+        "f1": 0.49025069637883,
+        "false_positive_rate": 0.023635872501350623,
+        "brier_score": 0.006654089853639325,
+        "review_rate": 0.03506666666666667,
+        "alerts_per_1000": 35.06666666666667,
+        "expected_cost": 1763.0,
+        "expected_cost_per_1000": 235.06666666666666,
+        "true_positives": 88,
+        "false_positives": 175,
+        "true_negatives": 7229,
+        "false_negatives": 8,
+        "n_rows": 7500,
+        "n_positives": 96,
+        "threshold": 0.050992
+      },
+      "test_metrics": {
+        "pr_auc": 0.7541678690479634,
+        "roc_auc": 0.9917491782310028,
+        "precision": 0.2719298245614035,
+        "recall": 0.9253731343283582,
+        "f1": 0.42033898305084755,
+        "false_positive_rate": 0.02233284003766985,
+        "brier_score": 0.004116676451366609,
+        "review_rate": 0.0304,
+        "alerts_per_1000": 30.4,
+        "expected_cost": 1392.0,
+        "expected_cost_per_1000": 185.6,
+        "true_positives": 62,
+        "false_positives": 166,
+        "true_negatives": 7267,
+        "false_negatives": 5,
+        "n_rows": 7500,
+        "n_positives": 67,
+        "threshold": 0.050992
+      },
+      "fit_seconds": 0.4691917499876581,
+      "best_iteration": null
+    },
+    "xgboost": {
+      "name": "xgboost",
+      "calibration": {
+        "method": null,
+        "brier_uncalibrated": 0.005188317038118839,
+        "brier_by_method": {
+          "sigmoid": 0.005498035447406977
+        },
+        "pr_auc_uncalibrated": 0.7863631335882639,
+        "pr_auc_by_method": {
+          "sigmoid": 0.7863631335882639
+        },
+        "rationale": "kept uncalibrated scores: no method improved Brier by >= 2% without losing more than 0.005 PR-AUC; isotonic skipped (96 positives < 500)"
+      },
+      "threshold": {
+        "threshold": 0.065,
+        "priority_threshold": 0.41,
+        "low_upper": 0.0325,
+        "policy_satisfied": true,
+        "rationale": "recall 0.896 >= target 0.80 within review-rate ceiling 5.0%; lowest expected cost among feasible thresholds",
+        "recall": 0.8958333333333334,
+        "precision": 0.3598326359832636,
+        "review_rate": 0.03186666666666667,
+        "alerts_per_1000": 31.866666666666667,
+        "expected_cost": 1851.0
+      },
+      "validation_metrics": {
+        "pr_auc": 0.7863631335882639,
+        "roc_auc": 0.9905892648118134,
+        "precision": 0.3598326359832636,
+        "recall": 0.8958333333333334,
+        "f1": 0.5134328358208955,
+        "false_positive_rate": 0.020664505672609402,
+        "brier_score": 0.005188317102231712,
+        "review_rate": 0.03186666666666667,
+        "alerts_per_1000": 31.866666666666667,
+        "expected_cost": 1851.0,
+        "expected_cost_per_1000": 246.8,
+        "true_positives": 86,
+        "false_positives": 153,
+        "true_negatives": 7251,
+        "false_negatives": 10,
+        "n_rows": 7500,
+        "n_positives": 96,
+        "threshold": 0.065
+      },
+      "test_metrics": {
+        "pr_auc": 0.7572563106216346,
+        "roc_auc": 0.9921588077371786,
+        "precision": 0.32558139534883723,
+        "recall": 0.835820895522388,
+        "f1": 0.46861924686192474,
+        "false_positive_rate": 0.015606080990178932,
+        "brier_score": 0.004081874308743017,
+        "review_rate": 0.022933333333333333,
+        "alerts_per_1000": 22.933333333333334,
+        "expected_cost": 1736.0,
+        "expected_cost_per_1000": 231.46666666666667,
+        "true_positives": 56,
+        "false_positives": 116,
+        "true_negatives": 7317,
+        "false_negatives": 11,
+        "n_rows": 7500,
+        "n_positives": 67,
+        "threshold": 0.065
+      },
+      "fit_seconds": 0.9808080420189071,
+      "best_iteration": 205
+    }
+  },
+  "split_summary": {
+    "train": {
+      "name": "train",
+      "rows": 35000,
+      "start": "2025-01-01T00:22:57+00:00",
+      "end": "2025-05-08T20:10:17+00:00",
+      "positives": 338,
+      "positive_rate": 0.009657
+    },
+    "validation": {
+      "name": "validation",
+      "rows": 7500,
+      "start": "2025-05-08T20:16:56+00:00",
+      "end": "2025-06-04T13:05:21+00:00",
+      "positives": 96,
+      "positive_rate": 0.0128
+    },
+    "test": {
+      "name": "test",
+      "rows": 7500,
+      "start": "2025-06-04T13:06:01+00:00",
+      "end": "2025-06-30T00:13:30+00:00",
+      "positives": 67,
+      "positive_rate": 0.008933
+    }
+  },
+  "rows": 50000,
+  "positives": 501,
+  "positive_rate": 0.01002,
+  "data_version": "fde1351dd59fee4e6e78ef200e5a082414434cc8c757a0f50838031da0474d7a",
+  "total_seconds": 2.2385286659991834,
+  "mlflow_run_id": "4e42034e8bb34f47b6675578ac935ea5",
+  "metadata": {
+    "model_name": "fraud-risk",
+    "model_version": "fraud-risk/1.0.0",
+    "model_type": "xgboost",
+    "run_id": "20261013T143729Z",
+    "schema_version": "fraud-transaction/1",
+    "score_schema_version": "fraud-score/1",
+    "feature_version": "features/1",
+    "training_timestamp": "2026-10-13T14:37:31.368262Z",
+    "training_data_version": "fde1351dd59fee4e6e78ef200e5a082414434cc8c757a0f50838031da0474d7a",
+    "training_data_name": "transactions.parquet",
+    "training_rows": 50000,
+    "git_commit": "b9bc3e6ae7c2bee59c55908aef45398683874d78",
+    "seed": 42,
+    "library_versions": {
+      "numpy": "2.5.4",
+      "pandas": "3.0.6",
+      "scikit-learn": "1.9.1",
+      "xgboost": "3.4.1",
+      "pydantic": "2.14.1",
+      "joblib": "1.6.0"
+    },
+    "training_config": {
+      "model_name": "fraud-risk",
+      "model_version": "fraud-risk/1.0.0",
+      "seed": 42,
+      "train_fraction": 0.7,
+      "validation_fraction": 0.15,
+      "baseline": {
+        "C": 0.5,
+        "class_weight": "balanced",
+        "max_iter": 2000,
+        "solver": "lbfgs"
+      },
+      "gradient_boosting": {
+        "n_estimators": 600,
+        "max_depth": 4,
+        "learning_rate": 0.05,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "min_child_weight": 5.0,
+        "reg_lambda": 1.0,
+        "gamma": 0.0,
+        "early_stopping_rounds": 40,
+        "scale_pos_weight_mode": "sqrt",
+        "n_jobs": 2
+      },
+      "calibration_methods": [
+        "sigmoid",
+        "isotonic"
+      ],
+      "cost_model": {
+        "false_negative_cost": 100.0,
+        "false_positive_cost": 5.0,
+        "true_positive_cost": 1.0,
+        "true_negative_cost": 0.0
+      },
+      "threshold_policy": {
+        "recall_target": 0.8,
+        "max_review_rate": 0.05,
+        "priority_precision_target": 0.75,
+        "low_band_fraction": 0.5
+      },
+      "permutation_importance": false,
+      "promote_latest": true
+    },
+    "feature_names": [
+      "log_amount",
+      "amount_band",
+      "threshold_proximity",
+      "near_threshold_flag",
+      "currency",
+      "transaction_type",
+      "channel",
+      "country",
+      "beneficiary_country",
+      "merchant_category",
+      "ip_risk_band",
+      "customer_segment",
+      "hour_of_day",
+      "day_of_week",
+      "hour_sin",
+      "hour_cos",
+      "unusual_hour_score",
+      "is_weekend",
+      "is_night",
+      "transactions_1h",
+      "transactions_24h",
+      "log1p_amount_1h",
+      "log1p_amount_24h",
+      "unique_counterparties_24h",
+      "velocity_ratio_1h_24h",
+      "amount_vs_inflow_24h",
+      "inflow_present_24h",
+      "amount_vs_account_median",
+      "amount_vs_account_mean",
+      "log1p_days_since_last",
+      "log1p_account_age_days",
+      "has_history",
+      "new_beneficiary_flag",
+      "new_device_flag",
+      "cross_border_flag",
+      "dormant_flag",
+      "new_account_flag"
+    ],
+    "policy": {
+      "threshold": 0.065,
+      "priority_threshold": 0.41,
+      "low_upper": 0.0325
+    },
+    "calibration_method": null,
+    "validation_metrics": {
+      "pr_auc": 0.7863631335882639,
+      "roc_auc": 0.9905892648118134,
+      "precision": 0.3598326359832636,
+      "recall": 0.8958333333333334,
+      "f1": 0.5134328358208955,
+      "false_positive_rate": 0.020664505672609402,
+      "brier_score": 0.005188317102231712,
+      "review_rate": 0.03186666666666667,
+      "alerts_per_1000": 31.866666666666667,
+      "expected_cost": 1851.0,
+      "expected_cost_per_1000": 246.8,
+      "true_positives": 86,
+      "false_positives": 153,
+      "true_negatives": 7251,
+      "false_negatives": 10,
+      "n_rows": 7500,
+      "n_positives": 96,
+      "threshold": 0.065
+    },
+    "test_metrics": {
+      "pr_auc": 0.7572563106216346,
+      "roc_auc": 0.9921588077371786,
+      "precision": 0.32558139534883723,
+      "recall": 0.835820895522388,
+      "f1": 0.46861924686192474,
+      "false_positive_rate": 0.015606080990178932,
+      "brier_score": 0.004081874308743017,
+      "review_rate": 0.022933333333333333,
+      "alerts_per_1000": 22.933333333333334,
+      "expected_cost": 1736.0,
+      "expected_cost_per_1000": 231.46666666666667,
+      "true_positives": 56,
+      "false_positives": 116,
+      "true_negatives": 7317,
+      "false_negatives": 11,
+      "n_rows": 7500,
+      "n_positives": 67,
+      "threshold": 0.065
+    },
+    "baseline_test_metrics": {
+      "pr_auc": 0.7541678690479634,
+      "roc_auc": 0.9917491782310028,
+      "precision": 0.2719298245614035,
+      "recall": 0.9253731343283582,
+      "f1": 0.42033898305084755,
+      "false_positive_rate": 0.02233284003766985,
+      "brier_score": 0.004116676451366609,
+      "review_rate": 0.0304,
+      "alerts_per_1000": 30.4,
+      "expected_cost": 1392.0,
+      "expected_cost_per_1000": 185.6,
+      "true_positives": 62,
+      "false_positives": 166,
+      "true_negatives": 7267,
+      "false_negatives": 5,
+      "n_rows": 7500,
+      "n_positives": 67,
+      "threshold": 0.050992
+    },
+    "selection_rationale": "xgboost has the higher validation PR-AUC (0.7864 vs 0.6672); expected cost 1851 vs 1763, review rate 3.19% vs 3.51%",
+    "split_summary": {
+      "train": {
+        "name": "train",
+        "rows": 35000,
+        "start": "2025-01-01T00:22:57+00:00",
+        "end": "2025-05-08T20:10:17+00:00",
+        "positives": 338,
+        "positive_rate": 0.009657
+      },
+      "validation": {
+        "name": "validation",
+        "rows": 7500,
+        "start": "2025-05-08T20:16:56+00:00",
+        "end": "2025-06-04T13:05:21+00:00",
+        "positives": 96,
+        "positive_rate": 0.0128
+      },
+      "test": {
+        "name": "test",
+        "rows": 7500,
+        "start": "2025-06-04T13:06:01+00:00",
+        "end": "2025-06-30T00:13:30+00:00",
+        "positives": 67,
+        "positive_rate": 0.008933
+      }
+    },
+    "artifact_sha256": "bde9b3138b0c89577ef5956fcb9e1f2a1c1e20490e347eee17e0e721d7e0f683"
+  }
+}
