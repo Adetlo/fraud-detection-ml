@@ -12,6 +12,12 @@ review-rate analysis, model explainability and monitored API inference.
 > concepts and is not intended for production fraud decisioning, regulatory compliance, or
 > autonomous blocking of transactions.
 
+> **Development history note.** This project was developed progressively beginning in 2024 and was
+> later consolidated for public release. Because complete original Git metadata was not retained,
+> portions of the repository history were reconstructed around known implementation phases.
+> Historical dates should be understood as approximate development milestones.
+> See [docs/HISTORY_RECONSTRUCTION.md](docs/HISTORY_RECONSTRUCTION.md).
+
 [![CI](https://github.com/Adetlo/fraud-detection-ml/actions/workflows/ci.yml/badge.svg)](https://github.com/Adetlo/fraud-detection-ml/actions/workflows/ci.yml)
 ![Python 3.12](https://img.shields.io/badge/python-3.12-blue)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
