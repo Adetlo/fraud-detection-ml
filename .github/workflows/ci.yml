@@ -21,14 +21,14 @@ jobs:
     name: Lint, format and type-check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10.3.0
         with:
           enable-cache: true
       - name: Set up Python
         run: uv python install 3.12
       - name: Install dependencies
-        run: uv sync
+        run: uv sync --frozen
       - name: Ruff (lint)
         run: uv run ruff check .
       - name: Ruff (format check)
@@ -40,21 +40,21 @@ jobs:
     name: Unit, property, integration, API and e2e tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10.3.0
         with:
           enable-cache: true
       - name: Set up Python
         run: uv python install 3.12
       - name: Install dependencies
-        run: uv sync
+        run: uv sync --frozen
       - name: Pytest with coverage (includes the lightweight model e2e)
         run: uv run pytest --cov --cov-report=term-missing --cov-report=xml --cov-fail-under=85
       - name: Lightweight CLI demo (generate -> train -> score -> drift)
         run: uv run fraud-ml demo --transactions 8000 --fraud-rate 0.015 --seed 7 --fast --no-mlflow --workdir ci-demo
       - name: Upload coverage and demo reports
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: coverage-and-reports
           path: |
@@ -67,17 +67,17 @@ jobs:
     name: Dependency and code security audit
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10.3.0
         with:
           enable-cache: true
       - name: Set up Python
         run: uv python install 3.12
       - name: Install dependencies
-        run: uv sync
-      - name: pip-audit (known vulnerabilities in resolved dependencies)
+        run: uv sync --frozen
+      - name: pip-audit (known vulnerabilities in locked dependencies)
         run: |
-          uv export --no-emit-project --no-hashes --format requirements-txt -o requirements-audit.txt
+          uv export --frozen --no-emit-project --no-hashes --format requirements-txt -o requirements-audit.txt
           uv run pip-audit -r requirements-audit.txt --strict --desc on
       - name: Bandit (static security analysis)
         run: uv run bandit -c pyproject.toml -r src -q
@@ -86,10 +86,10 @@ jobs:
     name: Docker image build, readiness and score smoke test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: docker/setup-buildx-action@v3
+      - uses: actions/checkout@v7
+      - uses: docker/setup-buildx-action@v4
       - name: Build image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           push: false
